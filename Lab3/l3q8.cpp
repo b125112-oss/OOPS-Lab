@@ -2,22 +2,29 @@
 #include <string>
 using namespace std;
 
-class Student {
+class Student
+{
 private:
     int rollNumber;
     string name;
     int numSubjects;
-    float* marks;   // dynamically allocated array of marks
+    float *marks; // dynamically allocated array of marks
 
 public:
     // Constructor / destructor to be safe with memory
-    Student() : marks(nullptr), numSubjects(0) {}
+    Student()
+    {
+        marks = nullptr;
+        numSubjects = 0;
+    }
 
-    ~Student() {
+    ~Student()
+    {
         releaseMarks();
     }
 
-    void acceptDetails() {
+    void acceptDetails()
+    {
         cout << "Enter Roll Number: ";
         cin >> rollNumber;
         cout << "Enter Name: ";
@@ -28,35 +35,43 @@ public:
         allocateMarks();
     }
 
-    void allocateMarks() {
-        marks = new float[numSubjects];  // allocate marks array inside the class
+    void allocateMarks()
+    {
+        marks = new float[numSubjects]; // allocate marks array inside the class
     }
 
-    void acceptMarks() {
+    void acceptMarks()
+    {
         cout << "Enter marks for " << numSubjects << " subjects:" << endl;
-        for (int i = 0; i < numSubjects; i++) {
+        for (int i = 0; i < numSubjects; i++)
+        {
             cin >> marks[i];
         }
     }
 
-    float calculateTotal() {
+    float calculateTotal()
+    {
         float total = 0;
-        for (int i = 0; i < numSubjects; i++) {
+        for (int i = 0; i < numSubjects; i++)
+        {
             total += marks[i];
         }
         return total;
     }
 
-    float calculateAverage() {
+    float calculateAverage()
+    {
         return calculateTotal() / numSubjects;
     }
 
-    void displayResult() {
+    void displayResult()
+    {
         cout << "\n--- Student Result ---" << endl;
         cout << "Roll Number: " << rollNumber << endl;
         cout << "Name: " << name << endl;
         cout << "Marks: ";
-        for (int i = 0; i < numSubjects; i++) {
+        for (int i = 0; i < numSubjects; i++)
+        {
             cout << marks[i] << " ";
         }
         cout << endl;
@@ -64,13 +79,15 @@ public:
         cout << "Average: " << calculateAverage() << endl;
     }
 
-    void releaseMarks() {
-        delete[] marks;   // release the dynamically allocated marks
+    void releaseMarks()
+    {
+        delete[] marks; // release the dynamically allocated marks
         marks = nullptr;
     }
 };
 
-int main() {
+int main()
+{
     Student s;
 
     s.acceptDetails();
